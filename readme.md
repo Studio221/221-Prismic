@@ -9,7 +9,7 @@ let Content = require('221-prismic')
 
 Get data from all documents :
 ```
-const conntent = new Content({
+const content = new Content({
 	baseUrl: 'myprismicrepo',
 	debug: true
 })
@@ -17,31 +17,31 @@ const conntent = new Content({
 
 Error callback :
 ```
-conntent.onError((err) => {
+content.onError((err) => {
 	console.log("Something went wrong: ", err)
 })
 ```
 
 Success callback (got data) :
 ```
-conntent.onReady(() => {
+content.onReady(() => {
 	console.log("Got data")
 })
 ```
 
 Get all keys:
 ```
-var key = conntent.get()
+var key = content.get()
 ```
 
-Get key of doc:
+Get keys of doc:
 ```
-var key = conntent.get('header')
+var key = content.get('header')
 ```
 
-Get specific key of doc:
+Get specific keys of doc:
 ```
-var key = conntent.get('header.item1')
+var key = content.get('header.item1')
 ```
 
 ## Links
