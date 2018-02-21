@@ -2,6 +2,11 @@
 
 ## How to use
 
+Import package :
+```
+let Content = require('221-prismic')
+```
+
 Get data from all documents :
 ```
 const contentFr = new Content({
