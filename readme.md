@@ -1,4 +1,6 @@
-# How to use
+# 221-Prismic
+
+## How to use
 
 Get data from all documents :
 ```
@@ -27,4 +29,6 @@ Get key :
 var key = contentFr.get('header.item_1')
 ```
 
-Guthub : https://github.com/Studio221/221-Prismic
+## Links
+
+Github : https://github.com/Studio221/221-Prismic
