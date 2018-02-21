@@ -26,3 +26,5 @@ Get key :
 ```
 var key = contentFr.get('header.item_1')
 ```
+
+Guthub : https://github.com/Studio221/221-Prismic
