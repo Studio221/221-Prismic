@@ -7,6 +7,7 @@ const Content = function(CONFIG, errorCallback){
 	this.documents = {}
 	this.readyCallback = null
 	this.errorCallback = null
+	this.hasData = false
 
 	// Internal logic
 	const _d = (message) => {
@@ -16,6 +17,7 @@ const Content = function(CONFIG, errorCallback){
 	}
 
 	this.sendReadyCallback = () => {
+		this.hasData = true
 		this.readyCallback()
 	}
 
@@ -39,6 +41,9 @@ const Content = function(CONFIG, errorCallback){
 	// External logic
 	this.onReady = (readyCallback) => {
 		this.readyCallback = readyCallback
+		if(this.hasData){
+			this.sendReadyCallback()
+		}
 	}
 
 	this.onError = (errorCallback) => {
