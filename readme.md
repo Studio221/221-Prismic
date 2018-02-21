@@ -9,29 +9,39 @@ let Content = require('221-prismic')
 
 Get data from all documents :
 ```
-const contentFr = new Content({
-	baseUrl: 'ephysiocom',
+const conntent = new Content({
+	baseUrl: 'myprismicrepo',
 	debug: true
 })
 ```
 
 Error callback :
 ```
-contentFr.onError((err) => {
+conntent.onError((err) => {
 	console.log("Something went wrong: ", err)
 })
 ```
 
 Success callback (got data) :
 ```
-contentFr.onReady(() => {
+conntent.onReady(() => {
 	console.log("Got data")
 })
 ```
 
-Get key :
+Get all keys:
 ```
-var key = contentFr.get('header.item_1')
+var key = conntent.get()
+```
+
+Get key of doc:
+```
+var key = conntent.get('header')
+```
+
+Get specific key of doc:
+```
+var key = conntent.get('header.item1')
 ```
 
 ## Links

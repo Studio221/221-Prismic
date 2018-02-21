@@ -46,19 +46,31 @@ const Content = function(CONFIG, errorCallback){
 	}
 
 	this.get = (key) => {
-		const splittedKey = key.split('.')
-		const selectedDocument = _.find(this.documents, (o) => {
-			return o.type == splittedKey[0]
-		})
-		if(selectedDocument !== undefined){
-			const selectedValue = selectedDocument.rawJSON[splittedKey[0]][splittedKey[1]]
-			if(selectedValue !== undefined){
-				return selectedValue;
-			}else{
-				return 'no_key'
+		if(key == undefined || key.length < 1){
+			var data = {};
+			for(var i in this.documents){
+				data = _.merge(data, this.documents[i].data);
 			}
+			return data;
 		}else{
-			return 'no_document'
+			const splittedKey = key.split('.')
+			const selectedDocument = _.find(this.documents, (o) => {
+				return o.type == splittedKey[0]
+			})
+			if(selectedDocument !== undefined){
+				if(splittedKey.length == 1){
+					return selectedDocument.data;
+				}else{
+					const selectedValue = selectedDocument.rawJSON[splittedKey[0]][splittedKey[1]]
+					if(selectedValue !== undefined){
+						return selectedValue;
+					}else{
+						return 'no_key'
+					}
+				}
+			}else{
+				return 'no_document'
+			}
 		}
 	}
 
