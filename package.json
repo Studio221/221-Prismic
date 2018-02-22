@@ -6,8 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Tristan Farneau",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Studio221/221-Prismic"
+  },
   "dependencies": {
     "lodash": "^4.17.5",
     "prismic.io": "^3.6.1"
