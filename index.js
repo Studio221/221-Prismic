@@ -66,8 +66,11 @@ const Content = function(CONFIG, errorCallback){
 				if(splittedKey.length == 1){
 					return selectedDocument.data;
 				}else{
-					const selectedValue = selectedDocument.rawJSON[splittedKey[0]][splittedKey[1]]
+					const selectedValue = selectedDocument.data[key];
 					if(selectedValue !== undefined){
+						if(selectedValue.type == 'StructuredText'){
+							selectedValue.value = selectedDocument.getStructuredText(key).asHtml()	
+						}
 						return selectedValue;
 					}else{
 						return 'no_key'
@@ -87,5 +90,20 @@ const Content = function(CONFIG, errorCallback){
 	}
 
 }
+
+// const content = new Content({
+// 	baseUrl: 'e-physio',
+// 	debug: true
+// })
+
+// content.onError((err) => {
+// 	console.log("Something went wrong: ", err)
+// })
+
+// content.onReady(() => {
+// 	console.log("Got data");
+// 	var value = content.get('terms.title')
+// 	console.log(value)
+// })
 
 module.exports = Content;
