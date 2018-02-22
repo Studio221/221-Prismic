@@ -50,13 +50,37 @@ const Content = function(CONFIG, errorCallback){
 		this.errorCallback = errorCallback
 	}
 
+	const _cleanEntry = (selectedValue, selectedDocument, key) => {
+		if(selectedValue.type == 'StructuredText'){
+			selectedValue.value = selectedDocument.getStructuredText(key).asHtml()	
+		}
+		return selectedValue
+	}
+
+	const _cleanDocument = (selectedDocument) => {
+		let data = selectedDocument.data
+		for(var key in data){
+			data[key] = _cleanEntry(data[key], selectedDocument, key)
+		}
+		return data
+	}
+
+	const _cleanDocuments = (selectedDocument) => {
+		let data = selectedDocument.data
+		for(var key in data){
+			data[key] = _cleanEntry(data[key], selectedDocument, key)
+		}
+		return data
+	}
+
 	this.get = (key) => {
 		if(key == undefined || key.length < 1){
-			var data = {};
+			var data = {}
 			for(var i in this.documents){
-				data = _.merge(data, this.documents[i].data);
+				let newData = _cleanDocument(this.documents[i])
+				data = _.merge(data, newData)
 			}
-			return data;
+			return data
 		}else{
 			const splittedKey = key.split('.')
 			const selectedDocument = _.find(this.documents, (o) => {
@@ -64,14 +88,12 @@ const Content = function(CONFIG, errorCallback){
 			})
 			if(selectedDocument !== undefined){
 				if(splittedKey.length == 1){
-					return selectedDocument.data;
+					return _cleanDocument(selectedDocument)
 				}else{
-					const selectedValue = selectedDocument.data[key];
+					let selectedValue = selectedDocument.data[key]
 					if(selectedValue !== undefined){
-						if(selectedValue.type == 'StructuredText'){
-							selectedValue.value = selectedDocument.getStructuredText(key).asHtml()	
-						}
-						return selectedValue;
+						selectedValue = _cleanEntry(selectedValue, selectedDocument, key)
+						return selectedValue
 					}else{
 						return 'no_key'
 					}
@@ -101,9 +123,9 @@ const Content = function(CONFIG, errorCallback){
 // })
 
 // content.onReady(() => {
-// 	console.log("Got data");
-// 	var value = content.get('terms.title')
+// 	console.log("Got data")
+// 	var value = content.get('ter')
 // 	console.log(value)
 // })
 
-module.exports = Content;
+module.exports = Content
