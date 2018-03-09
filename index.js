@@ -9,6 +9,9 @@ const Content = function(CONFIG, errorCallback){
 	this.errorCallback = null
 	this.hasData = false
 
+	// Config settings
+	CONFIG.lang == undefined ? CONFIG.lang = 'fr-fr' : null;
+
 	// Internal logic
 	const _d = (message) => {
 		if(CONFIG.debug == true){
@@ -23,7 +26,9 @@ const Content = function(CONFIG, errorCallback){
 
 	this.getDataFromPrismic = () => {
 		Prismic.api('https://'+CONFIG.baseUrl+'.prismic.io/api').then(function(api) {
-		  return api.query("")
+		  return api.query("", {
+		  	lang : CONFIG.lang
+		  })
 		}).then((response) => {
 			_d('Got '+response.results.length+' documents')
 			if(response.results === undefined || response.results.length === 0){
@@ -115,7 +120,8 @@ const Content = function(CONFIG, errorCallback){
 
 // const content = new Content({
 // 	baseUrl: 'e-physio',
-// 	debug: true
+// 	debug: true,
+// 	lang: 'fr-fr'
 // })
 
 // content.onError((err) => {

@@ -11,7 +11,8 @@ Get data from all documents :
 ```
 const content = new Content({
 	baseUrl: 'myprismicrepo',
-	debug: true
+	debug: true,
+	lang: 'fr-fr'
 })
 ```
 
