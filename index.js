@@ -26,7 +26,8 @@ const Content = function(CONFIG, errorCallback){
 
 	this.getDataFromPrismic = () => {
 		Prismic.api('https://'+CONFIG.baseUrl+'.prismic.io/api').then(function(api) {
-		  return api.query("", {
+		  return api.query(Prismic.Predicates.at('document.type', 'recipe'), {
+        pageSize : 100,
 		  	lang : CONFIG.lang
 		  })
 		}).then((response) => {
@@ -57,7 +58,7 @@ const Content = function(CONFIG, errorCallback){
 
 	const _cleanEntry = (selectedValue, selectedDocument, key) => {
 		if(selectedValue.type == 'StructuredText'){
-			selectedValue.value = selectedDocument.getStructuredText(key).asHtml()	
+			selectedValue.value = selectedDocument.getStructuredText(key).asHtml()
 		}
 		return selectedValue
 	}
