@@ -26,7 +26,7 @@ const Content = function(CONFIG, errorCallback){
 
 	this.getDataFromPrismic = () => {
 		Prismic.api('https://'+CONFIG.baseUrl+'.prismic.io/api').then(function(api) {
-		  return api.query(Prismic.Predicates.at('document.type', 'recipe'), {
+		  return api.query("", {
         pageSize : 100,
 		  	lang : CONFIG.lang
 		  })
